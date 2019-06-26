@@ -28,4 +28,12 @@ d=5/9*(b-32)
 print("摄氏温度{}转化为华氏温度为:{}".format(a,c))
 print("华氏温度{}转换为摄氏温度为:{}".format(b,d))
 
+
 #3.输入圆的半径计算周长和面积
+import math
+r=float(input("请输入圆的半径r："))
+
+p=2*math.pi*r   #圆的周长
+s=math.pi*r**2  #圆的面积
+print("圆的周长是:",p)
+print("圆的面积是:",s)
