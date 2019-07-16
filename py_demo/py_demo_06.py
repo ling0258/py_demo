@@ -1,209 +1,294 @@
-# 文件的基本操作
-# 三个步骤：打开文件，读取文件。写入文件。关闭文件
-
+#coding=utf-8
 """
-1. open   打开文件，并且返回文件操作对象
-2.read    将文件内容读取到内存
-3 write   将指定内容写入文件
-4 close   关闭文件
-
-"""
-# 实例
-# # 1.打开文件
-# file = open("C:/test.txt")
-# print(file)
-# # 2.读取,显示行数
-# text = file.read()
-# print(text)
-# print(len(text))
-# print(" - " * 10) #打印分割线
-# # 3.关闭文件
-# file.close()
-
-# 写入文件
-
-# 打开
-# file = open("C:/test.txt","w")# w写入会覆盖原有内容。a是追加在原有内容后面
-# # 写入
-# file.write("more")
-#
-# # 关闭
-# file.close()
-
-# readline 方法.查看单行
-#
-# file = open("C:/test.txt")
-# text = file.readline()
-# print(text) #查看单行
-#
-# file.close()
-
-# 多行读取
-#  readline 方法.查看单行
-# # #
-# file = open("C:/test.txt")
-# while True:
-#
-#     text = file.readline()
-#     if not text:
-#         break
-#     print(text) #查看单行
-# file.close()
-
-# 文件复制
-
-# # 小文件复制
-# # 打开
-# file1 = open("C:/test.txt")#源文件
-# file2 = open("C:/test01.txt","w")#目标文件
-#
-# # 2.读写
-# text = file1.read()
-# file2.write(text)
-# # 3关闭文件
-#
-# file1.close()
-# file2.close()
-
-# 文件目录的常用管理操作
-# os 模块中的方法
-"""
-1.rename    重命名
-2.remove    删除
-3.listdir      查看目录下文件
-4.mkdir         创建目录
-5.rmdir            删除目录
-6.getcwd            获取当前目录
-7.chdir             修改当前目录
-8.path.isdir        判断是否为文件
-
+面向对象技术简介
+类(Class): 用来描述具有相同的属性和方法的对象的集合。它定义了该集合中每个对象所共有的属性和方法。对象是类的实例。
+类变量：类变量在整个实例化的对象中是公用的。类变量定义在类中且在函数体之外。类变量通常不作为实例变量使用。
+数据成员：类变量或者实例变量, 用于处理类及其实例对象的相关的数据。
+方法重写：如果从父类继承的方法不能满足子类的需求，可以对其进行改写，这个过程叫方法的覆盖（override），也称为方法的重写。
+局部变量：定义在方法中的变量，只作用于当前实例的类。
+实例变量：在类的声明中，属性是用变量来表示的。这种变量就称为实例变量，是在类声明的内部但是在类的其他成员方法之外声明的。
+继承：即一个派生类（derived class）继承基类（base class）的字段和方法。继承也允许把一个派生类的对象作为一个基类对象对待。例如，有这样一个设计：一个Dog类型的对象派生自Animal类，这是模拟"是一个（is-a）"关系（例图，Dog是一个Animal）。
+实例化：创建一个类的实例，类的具体对象。
+方法：类中定义的函数。
+对象：通过类定义的数据结构实例。对象包括两个数据成员（类变量和实例变量）和方法。
 """
 
-# 异常的概念:如果python遇到一个错误,会停止程序的执行,并提示一些错误信息
-# 程序停止执行并提示错误信息,我们称之为:抛出异常
+
+# 使用 class 语句来创建一个新类，class 之后为类的名称并以冒号结尾:
+
+class ClassName:
+    pass
+# '类的帮助信息'   #类文档字符串
+   # class_suite  #类体
+
+# self代表类的实例，而非类
+class Test:
+    def prt(self):
+        print(self)
+        print(self.__class__)
 
 
-# 捕获异常
-# try:
-#     # 尝试执行的代码
-# except:
-#     # 出现错误的处理
+t = Test()
+t.prt()
+print(t.prt())
 
-# try:
-#     # 实例  提示用户书如一个整数
-#     num = int(input("请输入整数:"))
-#     # 使用 10 除以用户输入的整数并且输出
-#     result = 10/ num
-#
-#     print(result)
-# except ZeroDivisionError:
-#     print("除零错误")
-# except ValueError:
-#     print("请输入正确的整数!")
-
-# 异常捕获完整语法
-# else   只要尝试成功就执行else
-# finally  无论是否尝试成功.都执行
-
-# try:
-#     # 实例  提示用户书如一个整数
-#     num = int(input("请输入整数:"))
-#     # 使用 10除以用户输入的整数并且输出
-#     result = 10 / num
-#
-#     print(result)
-# except ValueError:
-#     print("请输入正确的整数!")
-# except Exception as result:
-#     print("未知错误 %s" % result)
-# else:
-#     print("尝试成功")
-# finally:
-#     print("无论是否出现错误都会执行的代码")
-#
-# print("- "* 50)
-
-
-
-# 主动抛出raise异常
-# 创建异常对象
-# 抛出异常对象
-
-# def input_password():
-#     # 提示用户输入密码
-#     pwd = input("请输入密码:")
-#     # 判断密码长度>=8,返回用户输入的密码
-#     if len(pwd) >= 8:
-#         return pwd
-#     # 如果<=8主动抛出异常
-#     print("主动抛出异常")
-#
-#     ex = Exception("密码长度不够")
-# #     抛出异常
-#     raise ex
-# # 提示用户输入密码
-# try:
-#     print(input_password())
-# except Exception as result:
-#     print(result)
-
-# csv是Comma-Separated Values的缩写，是用文本文件形式储存的表格数据
-
-import csv
-# with open("test.csv","r",encoding="utf-8")as f:
-#     reader = csv.reader(f)
-#     rows = [row for row in reader]
-# print(rows)
-
-# 要提取其中某一列，可以用下面的代码
-# with open("test.csv", "r", encoding = "utf-8") as f:
-#     reader = csv.reader(f)
-#     column = [row[1] for row in reader]
-#
-# print(column)
-
-# 写文件
-# 追加
-
-# row = ['5','hanmeimei','23','81']
-# out = open("test.csv","a",newline="")
-# csv_writer = csv.writer(out,dialect="excel")
-# csv_writer.writerow(row)
-
-
-# python 中的json
-#JSON 的全称是 JavaScript Object Notation，即 JavaScript 对象符号，它是一种轻量级的数据交换格式。JSON 的数据格式既适合人来读写，也适合计算机本身解析和生成。
 """
-JSON 类型	Python 类型
-对象（object）	字典（dict）
-数组（array）	列表（list）
-字符串（string）	字符串（str）
-整数（number(int)） 	整数（int）
-实数（number(real)）	浮点数（float）
-true	True
-false	False
-null 	None
+类的方法
+在类的内部，使用 def 关键字来定义一个方法，与一般函数定义不同，类方法必须包含参数 self, 且为第一个参数，self 代表的是类的实例"""
+
+
+# 类定义
+class people:
+    # 定义基本属性
+    name = ''
+    age = 0
+    # 定义私有属性,私有属性在类外部无法直接进行访问
+    __weight = 0
+
+    # 定义构造方法
+    def __init__(self, n, a, w):
+        self.name = n
+        self.age = a
+        self.__weight = w
+
+    def speak(self):
+        print("%s 说: 我 %d 岁。" % (self.name, self.age))
+
+
+# 实例化类
+p = people('runoob', 10, 30)
+p.speak()
+print(p.speak())
+
+
 """
-# import json
-# test_dict = {'a':1, 'b':2}
-#
-# #把字典转成json字符串
-# json_text = json.dumps(test_dict)
+继承
+Python 同样支持类的继承，如果一种语言不支持继承，类就没有什么意义。派生类的定义如下所示:"""
 
-# import json
-# import codecs
-#
-# # 从文件中读取内容
-# with codecs.open('1.json', 'r', 'utf-8') as f:
-#     json_text = f.read()
-#
-# # 把字符串转成字典
-# json_dict = json.loads(json_text)
 
-# 1、dumps：把字典转成json字符串import json
-# import json
-# import codecs
-# text_dict = {'a':1,'b':2}
-# #把字典转成json字符串并写入到文件
-# with codecs.open("1.json",'w','utf-8')as f:
-#     json.dump(text_dict,f)
+# 类定义
+class people:
+    # 定义基本属性
+    name = ''
+    age = 0
+    # 定义私有属性,私有属性在类外部无法直接进行访问
+    __weight = 0
+
+    # 定义构造方法
+    def __init__(self, n, a, w):
+        self.name = n
+        self.age = a
+        self.__weight = w
+
+    def speak(self):
+        print("%s 说: 我 %d 岁。" % (self.name, self.age))
+
+
+# 单继承示例
+class student(people):
+    grade = ''
+
+    def __init__(self, n, a, w, g):
+        # 调用父类的构函
+        people.__init__(self, n, a, w)
+        self.grade = g
+
+    # 覆写父类的方法
+    def speak(self):
+        print("%s 说: 我 %d 岁了，我在读 %d 年级" % (self.name, self.age, self.grade))
+
+
+s = student('ken', 10, 60, 3)
+s.speak()
+print(s.speak())
+
+# 多继承
+# Python同样有限的支持多继承形式。多继承的类定义形如下例
+# 类定义
+class people:
+    # 定义基本属性
+    name = ''
+    age = 0
+    # 定义私有属性,私有属性在类外部无法直接进行访问
+    __weight = 0
+
+    # 定义构造方法
+    def __init__(self, n, a, w):
+        self.name = n
+        self.age = a
+        self.__weight = w
+
+    def speak(self):
+        print("%s 说: 我 %d 岁。" % (self.name, self.age))
+
+
+# 单继承示例
+class student(people):
+    grade = ''
+
+    def __init__(self, n, a, w, g):
+        # 调用父类的构函
+        people.__init__(self, n, a, w)
+        self.grade = g
+
+    # 覆写父类的方法
+    def speak(self):
+        print("%s 说: 我 %d 岁了，我在读 %d 年级" % (self.name, self.age, self.grade))
+
+
+# 另一个类，多重继承之前的准备
+class speaker():
+    topic = ''
+    name = ''
+
+    def __init__(self, n, t):
+        self.name = n
+        self.topic = t
+
+    def speak(self):
+        print("我叫 %s，我是一个演说家，我演讲的主题是 %s" % (self.name, self.topic))
+
+
+# 多重继承
+class sample(speaker, student):
+    a = ''
+
+    def __init__(self, n, a, w, g, t):
+        student.__init__(self, n, a, w, g)
+        speaker.__init__(self, n, t)
+
+
+test = sample("Tim", 25, 80, 4, "Python")
+test.speak()  # 方法名同，默认调用的是在括号中排前地父类的方法
+print(test.speak())
+
+
+"""
+类属性与方法
+类的私有属性
+__private_attrs：两个下划线开头，声明该属性为私有，不能在类的外部被使用或直接访问。在类内部的方法中使用时 self.__private_attrs。
+
+类的方法
+在类的内部，使用 def 关键字来定义一个方法，与一般函数定义不同，类方法必须包含参数 self，且为第一个参数，self 代表的是类的实例。
+
+self 的名字并不是规定死的，也可以使用 this，但是最好还是按照约定是用 self。
+
+类的私有方法
+__private_method：两个下划线开头，声明该方法为私有方法，只能在类的内部调用 ，不能在类的外部调用。self.__private_methods。"""
+
+# gongyou
+class JustCounter:
+    __secretCount = 0  # 私有变量
+    publicCount = 0  # 公开变量
+
+    def count(self):
+        self.__secretCount += 1
+        self.publicCount += 1
+        print(self.__secretCount)
+
+
+counter = JustCounter()
+counter.count()
+counter.count()
+print(counter.publicCount)
+print(counter.__secretCount)  # 报错，实例不能访问私有变量
+
+#siyou
+class Site:
+    def __init__(self, name, url):
+        self.name = name  # public
+        self.__url = url  # private
+
+    def who(self):
+        print('name  : ', self.name)
+        print('url : ', self.__url)
+
+    def __foo(self):  # 私有方法
+        print('这是私有方法')
+
+    def foo(self):  # 公共方法
+        print('这是公共方法')
+        self.__foo()
+
+
+x = Site('菜鸟教程', 'www.runoob.com')
+x.who()  # 正常输出
+x.foo()  # 正常输出
+x.__foo()  # 报错
+
+
+
+
+# 子类，父类，超类，基类
+# 如果子类中定义与父类同名的方法或属性，则会自动覆盖父类对应的方法或属性
+# class Parent:
+#     def hello(self):
+#         print("正在调用父类的方法")
+#
+# class Child(Parent):
+#     def hello(self):
+#         print("正在调用子类的方法。。")
+# #
+# p = Parent()
+# print(p.hello())
+#
+# c = Child()
+# print(c.hello())
+#
+"""类的专有方法：
+__init__ : 构造函数，在生成对象时调用
+__del__ : 析构函数，释放对象时使用
+__repr__ : 打印，转换
+__setitem__ : 按照索引赋值
+__getitem__: 按照索引获取值
+__len__: 获得长度
+__cmp__: 比较运算
+__call__: 函数调用
+__add__: 加运算
+__sub__: 减运算
+__mul__: 乘运算
+__truediv__: 除运算
+__mod__: 求余运算
+__pow__: 乘方"""
+
+#
+# 多重继承
+
+# class Base1:
+#     def foo1(self):
+#         print("我是foo1，我为base1代言")
+#
+# class Base2:
+#     def foo2(self):
+#         print("我是foo2，我为base2代言")
+#
+# class C(Base1,Base2):
+#     pass
+# c = C()
+# print(c.foo1())
+# print(c.foo2())
+
+
+
+
+
+
+# 类 类对象，
+"""
+类定义             C
+类对象             C
+实例对象    a       b       c
+不要试图在一个类里面定力出所有能想到的特性各方法，应该利用继承和组合机制来进行扩展。
+用不同的词性命名，如属性名用名词，方法名用动词。
+"""
+
+# class C:
+#     count = 0
+
+
+
+# 什么事绑定
+"""
+Python 严格要求方法需要有实例才能被调用，这种限制其实就是Python所谓的绑定概念"""
+
+
